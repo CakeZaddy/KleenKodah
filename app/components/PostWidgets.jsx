@@ -1,23 +1,27 @@
-'use client'
-import React, { useEffect, useState } from 'react'
+// 'use client'
+// import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import Link from 'next/link'
 import { getPosts } from '@/sanity/client'
 import Image from 'next/image'
 
-const PostWidgets = ({ categories, slug }) => {
-  const [posts, setPosts] = useState([])
+export default async function PostWidgets({ categories, slug }) {
+  const posts = await getPosts()
 
-  useEffect(() => {
-    async function fetchPosts() {
-      const fetchedPosts = await getPosts()
-      fetchedPosts.sort(
-        (a, b) => new Date(b._createdAt) - new Date(a._createdAt)
-      )
-      setPosts(fetchedPosts)
-    }
-    fetchPosts()
-  }, [])
+  posts.sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt))
+
+  // const [posts, setPosts] = useState([])
+
+  // useEffect(() => {
+  //   async function fetchPosts() {
+  //     const fetchedPosts = await getPosts()
+  //     fetchedPosts.sort(
+  //       (a, b) => new Date(b._createdAt) - new Date(a._createdAt)
+  //     )
+  //     setPosts(fetchedPosts)
+  //   }
+  //   fetchPosts()
+  // }, [])
 
   return (
     <div className='bg-white shadow-lg rounded-lg p-8 mb-8'>
@@ -51,5 +55,3 @@ const PostWidgets = ({ categories, slug }) => {
     </div>
   )
 }
-
-export default PostWidgets

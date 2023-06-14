@@ -1,18 +1,21 @@
-'use client'
+// 'use client'
 import { getCategories } from '@/sanity/client'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+// import React, { useEffect, useState } from 'react'
 
-const Categories = () => {
-  const [categories, setCategories] = useState([])
+export default async function Categories() {
+  const categories = await getCategories()
 
-  useEffect(() => {
-    async function fetchCategories() {
-      const fetchedCategories = await getCategories()
-      setCategories(fetchedCategories)
-    }
-    fetchCategories()
-  }, [])
+  categories.sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt))
+  // const [categories, setCategories] = useState([])
+
+  // useEffect(() => {
+  //   async function fetchCategories() {
+  //     const fetchedCategories = await getCategories()
+  //     setCategories(fetchedCategories)
+  //   }
+  //   fetchCategories()
+  // }, [])
 
   return (
     <div className='bg-white shadow-lg rounded-lg p-8 mb-8 pb-12'>
@@ -27,5 +30,3 @@ const Categories = () => {
     </div>
   )
 }
-
-export default Categories
