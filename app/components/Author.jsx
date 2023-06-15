@@ -6,7 +6,7 @@ const Author = ({ author }) => {
   return (
     <div className='text-center mt-20 mb-8 p-12 relative rounded-lg bg-black bg-opacity-50'>
       <div className='absolute left-0 right-0 -top-16'>
-        <div className='flex justify-center'>
+        <div className='flex justify-center items-center'>
           <Image
             src={author.image}
             height={100}

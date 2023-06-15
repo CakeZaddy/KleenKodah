@@ -1,6 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
 import Link from 'next/link'
+import { textVariant } from './utils/motion'
 
 const categories = [
   { name: 'React', slug: 'react' },
@@ -11,7 +12,7 @@ const Header = () => {
   return (
     <div className='mx-auto px-10 mb-8 container'>
       <div className='border-b w-full inline-block border-blue-400 py-8'>
-        <div className='block md:float-left'>
+        <div variants={textVariant()} className='block md:float-left'>
           <Link href='/'>
             <span className='cursor-pointer font-bold text-4xl text-white'>
               Kleen Kodah

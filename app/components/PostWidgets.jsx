@@ -1,5 +1,3 @@
-// 'use client'
-// import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import Link from 'next/link'
 import { getPosts } from '@/sanity/client'
@@ -7,29 +5,20 @@ import Image from 'next/image'
 
 export default async function PostWidgets({ categories, slug }) {
   const posts = await getPosts()
+  let filteredPosts = posts
 
-  posts.sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt))
+  filteredPosts.sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt))
 
-  // const [posts, setPosts] = useState([])
-
-  // useEffect(() => {
-  //   async function fetchPosts() {
-  //     const fetchedPosts = await getPosts()
-  //     fetchedPosts.sort(
-  //       (a, b) => new Date(b._createdAt) - new Date(a._createdAt)
-  //     )
-  //     setPosts(fetchedPosts)
-  //   }
-  //   fetchPosts()
-  // }, [])
+  const cutPosts = filteredPosts.slice(0, 5)
 
   return (
     <div className='bg-white shadow-lg rounded-lg p-8 mb-8'>
       <h3 className='text-xl mb-8 font-semibold border-b pb-4'>
-        {slug ? 'Related Posts' : 'Recent Posts'}
+        {/* {slug ? 'Related Posts' : 'Recent Posts'} */}
+        Recent Posts
       </h3>
-      {posts.map((post) => (
-        <div key={post.title} className='flex items-center w-full mb-4'>
+      {cutPosts.map((post) => (
+        <div key={post.key} className='flex items-center w-full mb-4'>
           <div className='w-16 flex-none'>
             <Image
               alt={post.title}

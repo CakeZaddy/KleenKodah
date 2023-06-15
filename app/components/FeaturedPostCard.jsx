@@ -1,10 +1,15 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import moment from 'moment/moment'
+import { motion } from 'framer-motion'
+import { fadeIn } from './utils/motion'
 
 const FeaturedPostCard = ({ post }) => {
   return (
-    <div className='relative h-72'>
+    <motion.div
+      variants={fadeIn('', 'spring', post._id * 0.5, 0.75)}
+      className='relative h-72'
+    >
       <Link href={`/posts/${post.slug}`}>
         <div
           className='absolute rounded-lg bg-center bg-no-repeat bg-cover shadow-md inline-block w-full h-72'
@@ -24,7 +29,7 @@ const FeaturedPostCard = ({ post }) => {
               alt={post.author.name}
               height={30}
               width={30}
-              className='align-middle drop-shadow-lg rounded-full'
+              className='align-middle drop-shadow-lg rounded-full hover:bg-black'
               src={post.author.image}
             />
             <p className='inline align-middle text-white text-shadow ml-2 font-medium'>
@@ -33,7 +38,7 @@ const FeaturedPostCard = ({ post }) => {
           </div>
         </div>
       </Link>
-    </div>
+    </motion.div>
   )
 }
 

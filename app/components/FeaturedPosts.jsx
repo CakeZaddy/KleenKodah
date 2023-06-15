@@ -4,11 +4,11 @@ import FeaturedPostCard from './FeaturedPostCard'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css/bundle'
+import 'swiper/css'
 import { Pagination, Navigation } from 'swiper'
 
 export default async function FeaturedPosts() {
   const posts = await getPosts()
-  // console.log(posts)
 
   return (
     <div className='mb-8'>
@@ -16,7 +16,7 @@ export default async function FeaturedPosts() {
         spaceBetween={30}
         slidesPerView={1}
         loop={true}
-        autoplay={{ delay: 3000, disableOnInteraction: true }}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
         // scrollbar={{ draggable: true }}
         onSlideChange={() => console.log('slide change')}
         onSwiper={(swiper) => console.log(swiper)}
@@ -38,7 +38,7 @@ export default async function FeaturedPosts() {
           },
         }}
       >
-        {posts?.map((post) => (
+        {posts.map((post) => (
           <SwiperSlide>
             <FeaturedPostCard post={post} key={post._id} />
           </SwiperSlide>
