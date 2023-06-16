@@ -1,15 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import moment from 'moment/moment'
-import { motion } from 'framer-motion'
-import { fadeIn } from './utils/motion'
 
 const FeaturedPostCard = ({ post }) => {
   return (
-    <motion.div
-      variants={fadeIn('', 'spring', post._id * 0.5, 0.75)}
-      className='relative h-72'
-    >
+    <div className='relative h-72'>
       <Link href={`/posts/${post.slug}`}>
         <div
           className='absolute rounded-lg bg-center bg-no-repeat bg-cover shadow-md inline-block w-full h-72'
@@ -38,7 +33,7 @@ const FeaturedPostCard = ({ post }) => {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   )
 }
 

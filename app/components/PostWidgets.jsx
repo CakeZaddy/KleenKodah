@@ -1,3 +1,4 @@
+'use client'
 import moment from 'moment'
 import Link from 'next/link'
 import { getPosts } from '@/sanity/client'

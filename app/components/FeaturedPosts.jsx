@@ -1,14 +1,37 @@
 'use client'
 import { getPosts } from '@/sanity/client'
 import FeaturedPostCard from './FeaturedPostCard'
+import React, { useEffect, useState } from 'react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css/bundle'
 import 'swiper/css'
 import { Pagination, Navigation } from 'swiper'
+import Loader from './Loader'
 
-export default async function FeaturedPosts() {
-  const posts = await getPosts()
+export default function FeaturedPosts() {
+  const [loading, setLoading] = useState(true)
+  const [posts, setPosts] = useState([])
+
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const fetchedPosts = await getPosts()
+        setPosts(fetchedPosts)
+        setLoading(false)
+      } catch (error) {
+        console.error('Error fetching posts:', error)
+        setLoading(false)
+      }
+    }
+
+    fetchPosts()
+  }, [])
+
+  if (loading) {
+    // Show loader while loading
+    return <Loader />
+  }
 
   return (
     <div className='mb-8'>
