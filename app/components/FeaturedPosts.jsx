@@ -28,10 +28,10 @@ export default function FeaturedPosts() {
     fetchPosts()
   }, [])
 
-  if (loading) {
-    // Show loader while loading
-    return <Loader />
-  }
+  // if (loading) {
+  //   // Show loader while loading
+  //   return <Loader />
+  // }
 
   return (
     <div className='mb-8'>
