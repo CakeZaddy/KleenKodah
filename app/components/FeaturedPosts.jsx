@@ -9,29 +9,33 @@ import 'swiper/css'
 import { Pagination, Navigation } from 'swiper'
 import Loader from './Loader'
 
-export default function FeaturedPosts() {
-  const [loading, setLoading] = useState(true)
-  const [posts, setPosts] = useState([])
+export default async function FeaturedPosts() {
+  const posts = await getPosts()
 
-  useEffect(() => {
-    async function fetchPosts() {
-      try {
-        const fetchedPosts = await getPosts()
-        setPosts(fetchedPosts)
-        setLoading(false)
-      } catch (error) {
-        console.error('Error fetching posts:', error)
-        setLoading(false)
-      }
-    }
+  posts.sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt))
 
-    fetchPosts()
-  }, [])
+  // const [loading, setLoading] = useState(true)
+  // const [posts, setPosts] = useState([])
 
-  // if (loading) {
-  //   // Show loader while loading
-  //   return <Loader />
-  // }
+  // useEffect(() => {
+  //   async function fetchPosts() {
+  //     try {
+  //       const fetchedPosts = await getPosts()
+  //       setPosts(fetchedPosts)
+  //       setLoading(false)
+  //     } catch (error) {
+  //       console.error('Error fetching posts:', error)
+  //       setLoading(false)
+  //     }
+  //   }
+
+  //   fetchPosts()
+  // }, [])
+
+  // // if (loading) {
+  // //   // Show loader while loading
+  // //   return <Loader />
+  // // }
 
   return (
     <div className='mb-8'>
