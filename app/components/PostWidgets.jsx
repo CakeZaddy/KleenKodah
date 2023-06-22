@@ -3,9 +3,28 @@ import moment from 'moment'
 import Link from 'next/link'
 import { getPosts } from '@/sanity/client'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 
-export default async function PostWidgets({ categories, slug }) {
-  const posts = await getPosts()
+export default function PostWidgets({ categories, slug }) {
+  // const posts = await getPosts()
+
+  const [posts, setPosts] = useState([])
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const fetchedPosts = await getPosts()
+      setPosts(fetchedPosts)
+      setMounted(true)
+    }
+
+    fetchPosts()
+  }, [])
+
+  if (!mounted) {
+    return null
+  }
+
   let filteredPosts = posts
 
   filteredPosts.sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt))

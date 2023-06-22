@@ -15,7 +15,7 @@ export async function getPosts() {
     'slug': slug.current,
     'mainImage': mainImage.asset->url,
       description,
-      categories,
+      "categories": categories[]->title,
   }`
   )
 }
@@ -38,6 +38,24 @@ export async function getPost(slug) {
       
   }`,
     { slug }
+  )
+}
+
+export async function getCategoryPosts(category) {
+  return createClient(clientConfig).fetch(
+    groq`*[_type == 'post' && category == $category]{
+    _id,
+      title,
+      author -> {
+        name,
+          'image': image.asset->url,
+      },
+    _createdAt,
+    'slug': slug.current,
+    'mainImage': mainImage.asset->url,
+      description,
+  }`,
+    { category }
   )
 }
 
